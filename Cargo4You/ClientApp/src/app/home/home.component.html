@@ -1,0 +1,66 @@
+<div class="mt-2">
+  <h4>Search for parcel price</h4>
+</div>
+
+<div class="row">
+  <div class="col-md-12 text-center">
+    <form #packageForm="ngForm">
+      <div class="form-group">
+        <label class="control-label">Width</label>
+        <input type="number" id="width" #width="ngModel" name="width" class="form-control" [(ngModel)]="model.width" required/>
+        <div *ngIf="width.invalid && (width.dirty || width.touched)" class="alert-danger mt-1">
+          <div *ngIf="width.errors?.required">
+            Width is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Height</label>
+        <input type="number" id="height" #height="ngModel" name="height" class="form-control" [(ngModel)]="model.height" required />
+        <div *ngIf="height.invalid && (height.dirty || height.touched)" class="alert-danger mt-1">
+          <div *ngIf="height.errors?.required">
+            Height is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Depth</label>
+        <input type="number" id="depth" #depth="ngModel" name="depth" class="form-control" [(ngModel)]="model.depth" required />
+        <div *ngIf="depth.invalid && (depth.dirty || depth.touched)" class="alert-danger mt-1">
+          <div *ngIf="depth.errors?.required">
+            Depth is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Weight</label>
+        <input type="number" id="weight" #weight="ngModel" name="weight" class="form-control" [(ngModel)]="model.weight" required />
+        <div *ngIf="weight.invalid && (weight.dirty || weight.touched)" class="alert-danger mt-1">
+          <div *ngIf="weight.errors?.required">
+            Weight is required
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-primary" (click)="search(packageForm)" [disabled]="weight.invalid || depth.invalid || height.invalid || width.invalid">Search</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row text-center mt-2" *ngIf="courierPrices.length > 0">
+  <div class="col-12">
+    <table class="table table-striped">
+      <tr>
+        <th>Id</th>
+        <th>Courier</th>
+        <th>Price</th>
+      </tr>
+      <tr *ngFor="let courier of courierPrices">
+        <td>{{courier.id}}</td>
+        <td>{{courier.name}}</td>
+        <td>{{courier.price}}€</td>
+      </tr>
+    </table>
+  </div>
+</div>
